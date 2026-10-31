@@ -19,7 +19,7 @@ dependencies {
     implementation ("org.slf4j:slf4j-api:2.0.20")
 
     // Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    testImplementation ("org.slf4j:slf4j-simple:2.0.20")
+    implementation ("org.slf4j:slf4j-simple:2.0.20")
 }
 
 tasks.test {

@@ -1,0 +1,42 @@
+package com.project.demo.kafka;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Properties;
+
+public class ProducerDemo {
+
+    private static final Logger log = LoggerFactory.getLogger(ProducerDemo.class.getSimpleName());
+
+    public static void main(String[] args) {
+        log.info("Hello World!");
+
+        // Create Producer Properties
+
+        Properties properties = new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.26.152.7:9092");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+
+        // Create the Producer
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+
+        // create producer record.
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>("demo_java", "hello world");
+
+        // send data - asynchronous operation
+        producer.send(producerRecord);
+
+        // flush data - synchronous operation
+        producer.flush();
+        // flush and close the producer
+        producer.close();
+
+
+    }
+}
